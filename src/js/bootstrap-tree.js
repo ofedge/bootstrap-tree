@@ -1,14 +1,17 @@
 (function($){
 	// node click function
 	var clickBtn = function(){
+		var icons = BootstrapTree.prototype.settings.icons;
+		var openedNodeIcon = icons.openedNodeIcon;
+		var closedNodeIcon = icons.closedNodeIcon;
 		$('.tree li.parent_li > span').off('click').on('click', function(e) {
 			var children = $(this).parent('li.parent_li').find(' > ul > li');
 			if (children.is(":visible")) {
 				children.hide('fast');
-				$(this).attr('node-status', 'closed').find(' > span').removeClass('glyphicon-minus').addClass('glyphicon-plus');
+				$(this).attr('node-status', 'closed').find(' > span').removeClass(openedNodeIcon).addClass(closedNodeIcon);
 			} else {
 				children.show('fast');
-				$(this).attr('node-status', 'open').find(' > span').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+				$(this).attr('node-status', 'open').find(' > span').removeClass(closedNodeIcon).addClass(openedNodeIcon);
 			};
 			e.stopPropagation();
 		});
@@ -18,38 +21,42 @@
 			closeAll: function() {
 				$('.tree li.parent_li > span').each(function(){
 					if($(this).parent('li.parent_li').find(' > ul > li').is(':visible'))
-						$(this).trigger('click');
+						$(this).trigger('click', BootstrapTree.prototype.settings.icons);
 				});
 			},
 			openAll: function() {
 				$('.tree li.parent_li > span').each(function(){
 					if($(this).parent('li.parent_li').find(' > ul > li').is(':hidden'))
-						$(this).trigger('click');
+						$(this).trigger('click', BootstrapTree.prototype.settings.icons);
 				});
 			}
 	};
-	// default parameter
-	var defaults = {
-			openOnLoad: true,
-			openedNodeIcon: 'glyphicon-minus',
-			closedNodeIcon: 'glyphicon-plus',
-			leafNodeIcon: 'glyphicon-leaf'
+	
+	var BootstrapTree = function(){
 	};
+	
+	// init mark
+	var isInit = false;
+	
 	// init
-	var init = function() {
+	var init = function(options){
+		var icons = BootstrapTree.prototype.settings.icons;
+		var openedNodeIcon = icons.openedNodeIcon;
+		var leafNodeIcon = icons.leafNodeIcon;
 		$('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('node-status', 'open');
-		if($('.tree li > span').children().length > 0){
-			console.log($('.tree li > span').html());
-			return;
-		}
-		$('.tree li:has(ul)').find(' > span').prepend('<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>');
-		$('.tree li[class!=parent_li]').find(' > span').prepend('<span class="glyphicon glyphicon-leaf" aria-hidden="true"></span>');
+		if($('.tree li > span').children().length > 0){ return; }
+		$('.tree li:has(ul)').find(' > span').prepend('<span class="glyphicon ' + openedNodeIcon + '" aria-hidden="true"></span>');
+		$('.tree li[class!=parent_li]').find(' > span').prepend('<span class="glyphicon ' + leafNodeIcon + '" aria-hidden="true"></span>');
+		isInit = true;
 	};
 	
 	$.fn.bootstrapTree = function(options) {
+		if (!isInit)
+			BootstrapTree.prototype.settings = (typeof options == 'object') ? $.extend({}, $.fn.bootstrapTree.defaults, options) : $.fn.bootstrapTree.defaults;
+		var settings = BootstrapTree.prototype.settings;
 		$(this).addClass('tree');
 		init();
-		clickBtn();
+		clickBtn(settings.icons);
 		return this.each(function(){
 			var $this = $(this);
 			// when event
@@ -60,15 +67,14 @@
 				};
 				if (options == 'openAll') {
 					method.openAll();
-				}
+				};
 			};
 			// when parameter
 			if (typeof options == 'object') {
-				var settings = $.extend({}, defaults, options);
 				//icon
-				var openedNodeIcon = settings.openedNodeIcon;
-				var closedNodeIcon = settings.closedNodeIcon;
-				var leafNodeIcon = settings.leafNodeIcon;
+				var openedNodeIcon = settings.icons.openedNodeIcon;
+				var closedNodeIcon = settings.icons.closedNodeIcon;
+				var leafNodeIcon = settings.icons.leafNodeIcon;
 				// openOnLoad
 				if(!settings.openOnLoad) {
 					$('.tree li.parent_li > span').attr('node-status', 'closed').find(' > span').removeClass(openedNodeIcon).addClass(closedNodeIcon);
@@ -78,4 +84,13 @@
 			};
 		});
 	};
-})(jQuery);
+	$.fn.bootstrapTree.defaults = {
+			bootstrapversion: 3,
+			openOnLoad: true,
+			icons: {
+				openedNodeIcon: 'glyphicon-minus',
+				closedNodeIcon: 'glyphicon-plus',
+				leafNodeIcon: 'glyphicon-leaf'
+			}
+	};
+})(window.jQuery);

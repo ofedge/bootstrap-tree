@@ -50,6 +50,11 @@
 ```
 `$('div').tree({
     openOnLoad: false // 初始化时候不展开树
+    icons: { // 更改默认图标
+		openedNodeIcon: 'glyphicon-folder-open',
+		closedNodeIcon: 'glyphicon-folder-close',
+		leafNodeIcon: 'glyphicon-file'
+	}
 });
 ```
 
