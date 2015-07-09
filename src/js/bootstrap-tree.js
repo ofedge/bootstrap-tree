@@ -52,7 +52,7 @@
 	
 	$.fn.bootstrapTree = function(options) {
 		if (!isInit)
-			BootstrapTree.prototype.settings = (typeof options == 'object') ? $.extend({}, $.fn.bootstrapTree.defaults, options) : $.fn.bootstrapTree.defaults;
+			BootstrapTree.prototype.settings = (typeof options == 'object') ? $.extend(true, {}, $.fn.bootstrapTree.defaults, options) : $.fn.bootstrapTree.defaults;
 		var settings = BootstrapTree.prototype.settings;
 		$(this).addClass('tree');
 		init();
