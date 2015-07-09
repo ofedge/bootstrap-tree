@@ -61,7 +61,6 @@
 			var $this = $(this);
 			// when event
 			if (typeof options == 'string') {
-				console.log('ready to execute ' + options + ' function.');
 				if (options == 'closeAll') {
 					method.closeAll();
 				};
