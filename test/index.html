@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+<title>index.html</title>
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="../src/css/bootstrap-tree.css">
+<link rel="stylesheet" href="../resources/css/bootstrap.min.css">
+<script src="../resources/js/jquery-1.11.2.min.js"></script>
+<script src="../resources/js/bootstrap.min.js"></script>
+<script src="../src/js/bootstrap-tree.js"></script>
+<script>
+$(function(){
+	  $('#tree').bootstrapTree({
+		  openOnLoad: false
+	  });
+});
+function closeTree(){
+	$('#tree').bootstrapTree('closeAll');
+}
+function openTree(){
+	$('#tree').bootstrapTree('openAll');
+}
+</script>
+</head>
+<body>
+<div class="container well">
+    <fieldset>
+        <legend>bootstrap tree</legend>
+		<div id="tree">
+			<ul>
+				<li><span> 父节点</span> <a href="#">链接1</a>
+					<ul>
+						<li><span> 子节点</span> <a href="#">链接2</a>
+							<ul>
+								<li><span> 子子节点</span> <a href="#">链接3</a>
+									<ul>
+										<li><span> 子子子节点</span> <a href="#">链接4</a></li>
+									</ul>
+								</li>
+							</ul>
+							<ul>
+								<li><span> 子子节点</span> <a href="#">链接5</a></li>
+							</ul>
+						</li>
+					</ul>
+					<ul>
+						<li><span> 子节点</span> <a href="#">链接6</a>
+							<ul>
+								<li><span> 子子节点</span> <a href="#">链接7</a>
+									<ul>
+										<li><span> 子子子节点</span> <a href="#">链接8</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+					<ul>
+						<li><span> 子节点</span> <a href="#">链接9</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+    </fieldset>
+    <hr>
+    <button class="btn btn-default" onclick="closeTree()">关闭</button>
+    <button class="btn btn-default" onclick="openTree()">打开</button>
+</div>
+</body>
+</html>
