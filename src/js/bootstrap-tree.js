@@ -1,7 +1,7 @@
 (function($){
-	// node click function
+	// add node click function (private)
 	var clickBtn = function(){
-		var icons = BootstrapTree.prototype.settings.icons;
+		var icons = $.fn.bootstrapTree.settings.icons;
 		var openedNodeIcon = icons.openedNodeIcon;
 		var closedNodeIcon = icons.closedNodeIcon;
 		$('.tree li.parent_li > span').off('click').on('click', function(e) {
@@ -21,26 +21,23 @@
 			closeAll: function() {
 				$('.tree li.parent_li > span').each(function(){
 					if($(this).parent('li.parent_li').find(' > ul > li').is(':visible'))
-						$(this).trigger('click', BootstrapTree.prototype.settings.icons);
+						$(this).trigger('click', $.fn.bootstrapTree.settings.icons);
 				});
 			},
 			openAll: function() {
 				$('.tree li.parent_li > span').each(function(){
 					if($(this).parent('li.parent_li').find(' > ul > li').is(':hidden'))
-						$(this).trigger('click', BootstrapTree.prototype.settings.icons);
+						$(this).trigger('click', $.fn.bootstrapTree.settings.icons);
 				});
 			}
 	};
 	
-	var BootstrapTree = function(){
-	};
-	
-	// init mark
+	// init mark (private)
 	var isInit = false;
 	
-	// init
+	// init (private)
 	var init = function(options){
-		var icons = BootstrapTree.prototype.settings.icons;
+		var icons = $.fn.bootstrapTree.settings.icons;
 		var openedNodeIcon = icons.openedNodeIcon;
 		var leafNodeIcon = icons.leafNodeIcon;
 		$('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('node-status', 'open');
@@ -52,8 +49,8 @@
 	
 	$.fn.bootstrapTree = function(options) {
 		if (!isInit)
-			BootstrapTree.prototype.settings = (typeof options == 'object') ? $.extend(true, {}, $.fn.bootstrapTree.defaults, options) : $.fn.bootstrapTree.defaults;
-		var settings = BootstrapTree.prototype.settings;
+			$.fn.bootstrapTree.settings = (typeof options == 'object') ? $.extend(true, {}, $.fn.bootstrapTree.defaults, options) : $.fn.bootstrapTree.defaults;
+		var settings = $.fn.bootstrapTree.settings;
 		$(this).addClass('tree');
 		init();
 		clickBtn(settings.icons);
@@ -83,6 +80,7 @@
 			};
 		});
 	};
+	// default parameter
 	$.fn.bootstrapTree.defaults = {
 			bootstrapversion: 3,
 			openOnLoad: true,
