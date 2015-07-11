@@ -3,9 +3,8 @@
 <head lang="zh-CN">
 <title>index.html</title>
 <meta charset="utf-8">
-
-<link rel="stylesheet" href="../src/css/bootstrap-tree.css">
 <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="../src/css/bootstrap-tree.css">
 <script src="../resources/js/jquery-1.11.2.min.js"></script>
 <script src="../resources/js/bootstrap.min.js"></script>
 <script src="../src/js/bootstrap-tree.js"></script>
@@ -25,6 +24,12 @@ function closeTree(){
 }
 function openTree(){
 	$('#tree').bootstrapTree('openAll');
+}
+function destroy(){
+	$('#tree').bootstrapTree('destroy');
+}
+function init(){
+	$('#tree').bootstrapTree('init');
 }
 </script>
 </head>
@@ -71,6 +76,8 @@ function openTree(){
     <hr>
     <button class="btn btn-default" onclick="closeTree()">关闭</button>
     <button class="btn btn-default" onclick="openTree()">打开</button>
+    <button class="btn btn-default" onclick="destroy()">销毁</button>
+    <button class="btn btn-default" onclick="init()">初始化</button>
 </div>
 <footer>
 	<div class="container">

@@ -1,10 +1,11 @@
 (function($){
 	// add node click function (private)
 	var clickBtn = function(){
+		if (isClickBtn) return;
 		var icons = $.fn.bootstrapTree.settings.icons;
 		var openedNodeIcon = icons.openedNodeIcon;
 		var closedNodeIcon = icons.closedNodeIcon;
-		$('.tree li.parent_li > span').off('click').on('click', function(e) {
+		$('.tree li.parent_li > span').on('click', function(e) {
 			var children = $(this).parent('li.parent_li').find(' > ul > li');
 			if (children.is(":visible")) {
 				children.hide('fast');
@@ -15,6 +16,7 @@
 			};
 			e.stopPropagation();
 		});
+		isClickBtn = true;
 	};
 	// functions
 	var method = {
@@ -29,11 +31,20 @@
 					if($(this).parent('li.parent_li').find(' > ul > li').is(':hidden'))
 						$(this).trigger('click', $.fn.bootstrapTree.settings.icons);
 				});
+			},
+			init: function() {
+				isClickBtn = false;
+				clickBtn();
+			},
+			destroy: function() {
+				$('.tree li.parent_li > span').off('click');
 			}
 	};
 	
 	// init mark (private)
 	var isInit = false;
+	// click button mark (private)
+	var isClickBtn = false;
 	
 	// init (private)
 	var init = function(options){
@@ -41,29 +52,27 @@
 		var openedNodeIcon = icons.openedNodeIcon;
 		var leafNodeIcon = icons.leafNodeIcon;
 		$('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('node-status', 'open');
-		if($('.tree li > span').children().length > 0){ return; }
 		$('.tree li:has(ul)').find(' > span').prepend('<span class="glyphicon ' + openedNodeIcon + '" aria-hidden="true"></span>');
 		$('.tree li[class!=parent_li]').find(' > span').prepend('<span class="glyphicon ' + leafNodeIcon + '" aria-hidden="true"></span>');
 		isInit = true;
 	};
 	
 	$.fn.bootstrapTree = function(options) {
-		if (!isInit)
+		if (!isInit) {
 			$.fn.bootstrapTree.settings = (typeof options == 'object') ? $.extend(true, {}, $.fn.bootstrapTree.defaults, options) : $.fn.bootstrapTree.defaults;
+			$(this).addClass('tree');
+			init();
+		};
+		clickBtn();
 		var settings = $.fn.bootstrapTree.settings;
-		$(this).addClass('tree');
-		init();
-		clickBtn(settings.icons);
 		return this.each(function(){
 			var $this = $(this);
 			// when event
 			if (typeof options == 'string') {
-				if (options == 'closeAll') {
-					method.closeAll();
-				};
-				if (options == 'openAll') {
-					method.openAll();
-				};
+				if (options == 'closeAll') { method.closeAll(); };
+				if (options == 'openAll') { method.openAll(); };
+				if (options == 'destroy') { method.destroy(); };
+				if (options == 'init') { method.init(); };
 			};
 			// when parameter
 			if (typeof options == 'object') {
