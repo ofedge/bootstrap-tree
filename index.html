@@ -7,11 +7,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="Keywords" content="bootstrap tree">
 <meta name="Description" content="基于bootstrap的树插件">
-<link rel="stylesheet" href="css/bootstrap-tree.min.css">
 <link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-tree.min.css">
 <style>
 body { padding-top: 70px; }
 #demo:target, #usage:target, #parameter:target, #function:target { padding-top: 70px; }
+ul li { list-style: none; }
 </style>
 <script src="js/jquery-1.11.2.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -32,6 +33,12 @@ function closeTree(){
 }
 function openTree(){
     $('#tree').bootstrapTree('openAll');
+}
+function destroy(){
+	$('#tree').bootstrapTree('destroy');
+}
+function init(){
+	$('#tree').bootstrapTree('init');
 }
 </script>
 </head>
@@ -105,6 +112,8 @@ function openTree(){
     </fieldset>
     <button class="btn btn-default" onclick="closeTree()">关闭</button>
     <button class="btn btn-default" onclick="openTree()">打开</button>
+    <button class="btn btn-default" onclick="destroy()">销毁</button>
+    <button class="btn btn-default" onclick="init()">初始化</button>
   </div>
   <hr>
   <div id="usage">
@@ -187,14 +196,31 @@ $('#tree').bootstrapTree({
       <legend>方法</legend>
       <div class="well">
         <ul>
-          <li><span>openAll: 打开所有节点</span></li>
-          <li><span>closeAll: 关闭所有节点</span></li>
+          <li>
+            <span>openAll: 打开所有节点</span>
+            <ul>
+              <li><code>$('#tree').bootstrapTree('openAll');</code></li>
+            </ul>
+          </li>
+          <li>
+            <span>closeAll: 关闭所有节点</span>
+            <ul>
+              <li><code>$('#tree').bootstrapTree('closeAll');</code></li>
+            </ul>
+          </li>
+          <li>
+            <span>destroy: 销毁节点点击事件</span>
+            <ul>
+              <li><code>$('#tree').bootstrapTree('destroy');</code></li>
+            </ul>
+          </li>
+          <li>
+            <span>init: 添加节点点击事件</span>
+            <ul>
+              <li><code>$('#tree').bootstrapTree('init');</code></li>
+            </ul>
+          </li>
         </ul>
-        <p>使用</p>
-        <pre>
-$('#tree').bootstrapTree('openAll');
-$('#tree').bootstrapTree('closeAll');
-        </pre>
       </div>
     </fieldset>
   </div>
