@@ -41,6 +41,7 @@
 					};
 					e.stopPropagation();
 				});
+				this.$element.data('bindClick', true);
 			},
 			setOptions: function(options){ // 设置参数
 				var settings = this.settings;
@@ -65,9 +66,13 @@
 				});
 			},
 			init: function() {
-				return this.bindClick();
+				if(!this.$element.data('bindClick')){
+					this.bindClick();
+				}
+				return this.$element;
 			},
 			destroy: function() {
+				this.$element.removeData('bindClick');
 				return this.$element.find('li.parent_li > span').off('click');
 			}
 	};
