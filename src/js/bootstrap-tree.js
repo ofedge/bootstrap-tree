@@ -69,10 +69,7 @@
 			var $this = $(this);
 			// when event
 			if (typeof options == 'string') {
-				if (options == 'closeAll') { method.closeAll(this); };
-				if (options == 'openAll') { method.openAll(this); };
-				if (options == 'destroy') { method.destroy(this); };
-				if (options == 'init') { method.init(this); };
+				method[options](this);
 			};
 			// when parameter
 			if (typeof options == 'object') {
