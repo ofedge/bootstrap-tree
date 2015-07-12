@@ -8,71 +8,103 @@
 <script src="../resources/js/jquery-1.11.2.min.js"></script>
 <script src="../resources/js/bootstrap.min.js"></script>
 <script src="../src/js/bootstrap-tree.js"></script>
+<!-- <script src="../lib/js/bootstrap-tree.min.js"></script> -->
 <script>
 $(function(){
-	$('#tree').bootstrapTree({
-		openOnLoad: false,
-		icons: {
-			openedNodeIcon: 'glyphicon-folder-open',
-			closedNodeIcon: 'glyphicon-folder-close',
-			leafNodeIcon: 'glyphicon-file'
-		}
-	});
+  $('#tree1').bootstrapTree({
+    openOnLoad: true,
+    icons: {
+      openedNodeIcon: 'glyphicon-folder-open',
+      closedNodeIcon: 'glyphicon-folder-close',
+      leafNodeIcon: 'glyphicon-file'
+    }
+  });
 });
 function closeTree(){
-	$('#tree').bootstrapTree('closeAll');
+  $('#tree1').bootstrapTree('closeAll');
 }
 function openTree(){
-	$('#tree').bootstrapTree('openAll');
+  $('#tree1').bootstrapTree('openAll');
 }
 function destroy(){
-	$('#tree').bootstrapTree('destroy');
+  $('#tree1').bootstrapTree('destroy');
 }
 function init(){
-	$('#tree').bootstrapTree('init');
+  $('#tree1').bootstrapTree('init');
 }
 </script>
 </head>
 <body>
 <div class="container well">
+  <div class="col-md-5">
     <fieldset>
-        <legend>bootstrap tree</legend>
-		<div id="tree">
-			<ul>
-				<li><span> 父节点</span> <a href="#">链接1</a>
-					<ul>
-						<li><span> 子节点</span> <a href="#">链接2</a>
-							<ul>
-								<li><span> 子子节点</span> <a href="#">链接3</a>
-									<ul>
-										<li><span> 子子子节点</span> <a href="#">链接4</a></li>
-									</ul>
-								</li>
-							</ul>
-							<ul>
-								<li><span> 子子节点</span> <a href="#">链接5</a></li>
-							</ul>
-						</li>
-					</ul>
-					<ul>
-						<li><span> 子节点</span> <a href="#">链接6</a>
-							<ul>
-								<li><span> 子子节点</span> <a href="#">链接7</a>
-									<ul>
-										<li><span> 子子子节点</span> <a href="#">链接8</a>
-										</li>
-									</ul>
-								</li>
-							</ul>
-						</li>
-					</ul>
-					<ul>
-						<li><span> 子节点</span> <a href="#">链接9</a></li>
-					</ul>
-				</li>
-			</ul>
-		</div>
+      <legend>code</legend>
+      <pre>
+$(function(){
+  $('#tree1').bootstrapTree({
+    openOnLoad: true, // 默认打开树
+    icons: { // 节点图标
+      openedNodeIcon: 'glyphicon-folder-open',
+      closedNodeIcon: 'glyphicon-folder-close',
+      leafNodeIcon: 'glyphicon-file'
+    }
+  });
+});
+function closeTree(){ // 关闭
+  $('#tree1').bootstrapTree('closeAll');
+}
+function openTree(){ // 打开
+  $('#tree1').bootstrapTree('openAll');
+}
+function destroy(){ // 销毁
+  $('#tree1').bootstrapTree('destroy');
+}
+function init(){ // 初始化
+  $('#tree1').bootstrapTree('init');
+}
+      </pre>
     </fieldset>
+  </div>
+  <div class="col-md-7">
+    <fieldset>
+      <legend>demo</legend>
+    <div id="tree1">
+      <ul>
+        <li><span> 父节点</span> <a href="#">链接1</a>
+          <ul>
+            <li><span> 子节点</span> <a href="#">链接2</a>
+              <ul>
+                <li><span> 子子节点</span> <a href="#">链接3</a>
+                  <ul>
+                    <li><span> 子子子节点</span> <a href="#">链接4</a></li>
+                  </ul>
+                </li>
+              </ul>
+              <ul>
+                <li><span> 子子节点</span> <a href="#">链接5</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul>
+            <li><span> 子节点</span> <a href="#">链接6</a>
+              <ul>
+                <li><span> 子子节点</span> <a href="#">链接7</a>
+                  <ul>
+                    <li><span> 子子子节点</span> <a href="#">链接8</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul>
+            <li><span> 子节点</span> <a href="#">链接9</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    </fieldset>
+  </div>
     <hr>
     <button class="btn btn-default" onclick="closeTree()">关闭</button>
     <button class="btn btn-default" onclick="openTree()">打开</button>
@@ -80,13 +112,13 @@ function init(){
     <button class="btn btn-default" onclick="init()">初始化</button>
 </div>
 <footer>
-	<div class="container">
-        <ul>
-            <li><a href="http://jquery.com">jQuery</a>
-            <li><a href="http://www.bootcss.com/">Bootstrap 中文网</a>
-            <li><a href="http://glyphicons.com/">glyphicons</a>
-        </ul>
-	</div>
+  <div class="container">
+    <ul>
+      <li><a href="http://jquery.com">jQuery</a>
+      <li><a href="http://www.bootcss.com/">Bootstrap 中文网</a>
+      <li><a href="http://glyphicons.com/">glyphicons</a>
+    </ul>
+  </div>
 </footer>
 </body>
 </html>
