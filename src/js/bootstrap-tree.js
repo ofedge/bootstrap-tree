@@ -1,11 +1,11 @@
 (function($){
 	// add node click function (private)
-	var clickBtn = function(){
+	var clickBtn = function(dom){
 		if (isClickBtn) return;
 		var icons = $.fn.bootstrapTree.settings.icons;
 		var openedNodeIcon = icons.openedNodeIcon;
 		var closedNodeIcon = icons.closedNodeIcon;
-		$('.tree li.parent_li > span').on('click', function(e) {
+		$(dom).find('li.parent_li > span').on('click', function(e) {
 			var children = $(this).parent('li.parent_li').find(' > ul > li');
 			if (children.is(":visible")) {
 				children.hide('fast');
@@ -20,24 +20,24 @@
 	};
 	// functions
 	var method = {
-			closeAll: function() {
-				$('.tree li.parent_li > span').each(function(){
+			closeAll: function(dom) {
+				$(dom).find('li.parent_li > span').each(function(){
 					if($(this).parent('li.parent_li').find(' > ul > li').is(':visible'))
 						$(this).trigger('click', $.fn.bootstrapTree.settings.icons);
 				});
 			},
-			openAll: function() {
-				$('.tree li.parent_li > span').each(function(){
+			openAll: function(dom) {
+				$(dom).find('li.parent_li > span').each(function(){
 					if($(this).parent('li.parent_li').find(' > ul > li').is(':hidden'))
 						$(this).trigger('click', $.fn.bootstrapTree.settings.icons);
 				});
 			},
-			init: function() {
+			init: function(dom) {
 				isClickBtn = false;
-				clickBtn();
+				clickBtn(dom);
 			},
-			destroy: function() {
-				$('.tree li.parent_li > span').off('click');
+			destroy: function(dom) {
+				$(dom).find('li.parent_li > span').off('click');
 			}
 	};
 	
@@ -47,13 +47,13 @@
 	var isClickBtn = false;
 	
 	// init (private)
-	var init = function(options){
+	var init = function(dom){
 		var icons = $.fn.bootstrapTree.settings.icons;
 		var openedNodeIcon = icons.openedNodeIcon;
 		var leafNodeIcon = icons.leafNodeIcon;
-		$('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('node-status', 'open');
-		$('.tree li:has(ul)').find(' > span').prepend('<span class="glyphicon ' + openedNodeIcon + '" aria-hidden="true"></span>');
-		$('.tree li[class!=parent_li]').find(' > span').prepend('<span class="glyphicon ' + leafNodeIcon + '" aria-hidden="true"></span>');
+		$(dom).find('li:has(ul)').addClass('parent_li').find(' > span').attr('node-status', 'open');
+		$(dom).find('li:has(ul)').find(' > span').prepend('<span class="glyphicon ' + openedNodeIcon + '" aria-hidden="true"></span>');
+		$(dom).find('li[class!=parent_li]').find(' > span').prepend('<span class="glyphicon ' + leafNodeIcon + '" aria-hidden="true"></span>');
 		isInit = true;
 	};
 	
@@ -61,18 +61,18 @@
 		if (!isInit) {
 			$.fn.bootstrapTree.settings = (typeof options == 'object') ? $.extend(true, {}, $.fn.bootstrapTree.defaults, options) : $.fn.bootstrapTree.defaults;
 			$(this).addClass('tree');
-			init();
+			init(this);
 		};
-		clickBtn();
+		clickBtn(this);
 		var settings = $.fn.bootstrapTree.settings;
 		return this.each(function(){
 			var $this = $(this);
 			// when event
 			if (typeof options == 'string') {
-				if (options == 'closeAll') { method.closeAll(); };
-				if (options == 'openAll') { method.openAll(); };
-				if (options == 'destroy') { method.destroy(); };
-				if (options == 'init') { method.init(); };
+				if (options == 'closeAll') { method.closeAll(this); };
+				if (options == 'openAll') { method.openAll(this); };
+				if (options == 'destroy') { method.destroy(this); };
+				if (options == 'init') { method.init(this); };
 			};
 			// when parameter
 			if (typeof options == 'object') {
@@ -82,8 +82,8 @@
 				var leafNodeIcon = settings.icons.leafNodeIcon;
 				// openOnLoad
 				if(!settings.openOnLoad) {
-					$('.tree li.parent_li > span').attr('node-status', 'closed').find(' > span').removeClass(openedNodeIcon).addClass(closedNodeIcon);
-					$('.tree li.parent_li').find(' > ul > li').hide();
+					$(this).find('li.parent_li > span').attr('node-status', 'closed').find(' > span').removeClass(openedNodeIcon).addClass(closedNodeIcon);
+					$(this).find('li.parent_li').find(' > ul > li').hide();
 				};
 				
 			};
