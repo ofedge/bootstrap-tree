@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+.container {
+    width: 500px;
+    font-family: 微软雅黑, Times New Roman;
+    font-size: 16px;
+    margin: 30px auto
+}
+.container .row {
+    width: 100%;
+    height: 40px;
+    margin: 10px 0;
+}
+.row label {
+    width: 50px;
+    height: 100%;
+}
+.row select {
+    width: 370px;
+    height: 100%;
+    margin-left: 20px;
+    border-radius: 5px;
+}
+</style>
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="bin/allCity.js"></script>
+<script src="src/js/provinceandcity.js"></script>
+<script>
+$(function(){
+	$.provinceAndCity({
+		province: '#p',
+		city: '#c',
+		district: '#d'
+	});
+});
+</script>
+<title>all city</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <label for="p">省份</label>
+            <select id="p">
+                <option>test1</option>
+                <option>test2</option>
+            </select>
+        </div>
+        <div class="row">
+            <label for="c">城市</label>
+            <select id="c">
+                <option>test1</option>
+                <option>test2</option>
+            </select>
+        </div>
+        <div class="row">
+            <label for="d">区域</label>
+            <select id="d">
+                <option>test1</option>
+                <option>test2</option>
+            </select>
+        </div>
+    </div>
+</body>
+</html>
