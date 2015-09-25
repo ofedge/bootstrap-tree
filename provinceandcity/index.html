@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
+<script src="//cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="allCity.js"></script>
+<script src="provinceandcity.js"></script>
+<script>
+$(function(){
+	$.provinceAndCity({
+		province: '#p',
+		city: '#c',
+		district: '#d'
+	});
+});
+</script>
+<title>all city</title>
+</head>
+<body>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-navbar-collapse" aria-expanded="false">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">bootstrap tree</a>
+      </div>
+      <div class="collapse navbar-collapse" id="nav-navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="#demo">示例</a>
+          <li><a href="#usage">用法</a>
+          <li><a href="#parameter">参数</a>
+          <li><a href="#function">方法</a>
+        </ul>
+      </div> 
+   </div>
+  </nav>
+  <div class="container">
+      <div class="row">
+          <label for="p">省份</label>
+          <select id="p">
+              <option>test1</option>
+              <option>test2</option>
+          </select>
+      </div>
+      <div class="row">
+          <label for="c">城市</label>
+          <select id="c">
+              <option>test1</option>
+              <option>test2</option>
+          </select>
+      </div>
+      <div class="row">
+          <label for="d">区域</label>
+          <select id="d">
+              <option>test1</option>
+              <option>test2</option>
+          </select>
+      </div>
+  </div>
+</body>
+</html>
