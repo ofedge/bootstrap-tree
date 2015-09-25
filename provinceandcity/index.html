@@ -2,17 +2,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
-<script src="//cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+<style>
+body { padding-top: 70px }
+demo:target, #usage:target { padding-top: 70px }
+</style>
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
 <script src="allCity.js"></script>
 <script src="provinceandcity.js"></script>
 <script>
 $(function(){
-	$.provinceAndCity({
-		province: '#p',
-		city: '#c',
-		district: '#d'
-	});
+  $.provinceAndCity({
+    province: '#p',
+    city: '#c',
+    district: '#d'
+  });
 });
 </script>
 <title>all city</title>
@@ -28,40 +32,74 @@ $(function(){
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">bootstrap tree</a>
+        <a class="navbar-brand" href="#">Province And City</a>
       </div>
       <div class="collapse navbar-collapse" id="nav-navbar-collapse">
         <ul class="nav navbar-nav">
           <li><a href="#demo">示例</a>
           <li><a href="#usage">用法</a>
-          <li><a href="#parameter">参数</a>
-          <li><a href="#function">方法</a>
         </ul>
       </div> 
    </div>
   </nav>
   <div class="container">
-      <div class="row">
-          <label for="p">省份</label>
-          <select id="p">
-              <option>test1</option>
-              <option>test2</option>
-          </select>
+    <fieldset id="demo">
+      <legend>示例</legend>
+      <div class="well col-md-5">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label class="col-md-2 control-label" for="p">省份</label>
+            <div class="col-md-10">
+              <select class="form-control" id="p"></select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-2 control-label" for="c">城市</label>
+            <div class="col-md-10">
+              <select class="form-control" id="c"></select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-2 control-label" for="d">区域</label>
+            <div class="col-md-10">
+              <select class="form-control" id="d"></select>
+            </div>
+          </div>
+        </form>
       </div>
-      <div class="row">
-          <label for="c">城市</label>
-          <select id="c">
-              <option>test1</option>
-              <option>test2</option>
-          </select>
+      <div class="well col-md-offset-2 col-md-5">
+        <div id="pr">...</div>
+        <div id="cr">...</div>
+        <div id="dr">...</div>
       </div>
-      <div class="row">
-          <label for="d">区域</label>
-          <select id="d">
-              <option>test1</option>
-              <option>test2</option>
-          </select>
-      </div>
+    </fieldset>
+    <script>
+    $(function(){
+        $('#p, #c, #d').on('change', function(){
+           $('#pr').html($('#p').val() + ", " + $('#p :selected').html());
+           $('#cr').html($('#c').val() + ", " + $('#c :selected').html());
+           $('#dr').html($('#d').val() + ", " + $('#d :selected').html());
+        });
+        $('#p').trigger('change');
+    });
+    </script>
+    <fieldset id="usage">
+      <legend>用法</legend>
+      <pre>
+      <b>html:</b>
+      &lt;select&nbsp;id=&quot;province&quot;&gt;&lt;/select&gt;
+      &lt;select&nbsp;id=&quot;city&quot;&gt;&lt;/select&gt;
+      &lt;select&nbsp;id=&quot;district&quot;&gt;&lt;/select&gt;
+      
+      <b>js:</b>
+      $.provinceAndCity({
+          province: '#province',
+          city: '#city',
+          district: '#district'
+      });
+      </pre>
+      
+    </fieldset>
   </div>
 </body>
 </html>
