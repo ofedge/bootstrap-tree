@@ -2,12 +2,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+<link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 <style>
 body { padding-top: 70px }
 demo:target, #usage:target { padding-top: 70px }
 </style>
-<script src="//cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
 <script src="allCity.js"></script>
 <script src="provinceandcity.js"></script>
 <script>
@@ -15,7 +15,10 @@ $(function(){
   $.provinceAndCity({
     province: '#p',
     city: '#c',
-    district: '#d'
+    district: '#d',
+    provinceValue: '台湾',
+    cityValue: '台湾',
+    districtValue: '基隆市'
   });
 });
 </script>
@@ -78,12 +81,14 @@ $(function(){
     </fieldset>
     <script>
     $(function(){
+    	$('#pr').html($('#p').val() + ", " + $('#p :selected').html());
+        $('#cr').html($('#c').val() + ", " + $('#c :selected').html());
+        $('#dr').html($('#d').val() + ", " + $('#d :selected').html());
         $('#p, #c, #d').on('change', function(){
            $('#pr').html($('#p').val() + ", " + $('#p :selected').html());
            $('#cr').html($('#c').val() + ", " + $('#c :selected').html());
            $('#dr').html($('#d').val() + ", " + $('#d :selected').html());
         });
-        $('#p').trigger('change');
     });
     </script>
     <fieldset id="usage">
@@ -98,7 +103,10 @@ $(function(){
       $.provinceAndCity({
           province: '#province',
           city: '#city',
-          district: '#district'
+          district: '#district',
+          provinceValue: '台湾',
+          cityValue: '台湾',
+          districtValue: '基隆市'
       });
       </pre>
       
