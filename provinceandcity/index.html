@@ -25,7 +25,7 @@
     border-radius: 5px;
 }
 </style>
-<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
 <script src="bin/allCity.js"></script>
 <script src="src/js/provinceandcity.js"></script>
 <script>
@@ -33,7 +33,10 @@ $(function(){
 	$.provinceAndCity({
 		province: '#p',
 		city: '#c',
-		district: '#d'
+		district: '#d',
+		provinceValue: '河南',
+		cityValue: '郑州',
+		districtValue: '二七'
 	});
 });
 </script>
