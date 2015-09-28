@@ -11,7 +11,8 @@ $(function(){
         district: '#district',
         provinceValue: '台湾',
         cityValue: '台湾',
-        districtValue: '基隆'
+        districtValue: '基隆',
+        textValue: true // 使用文本作为value值, 和省市区名字一致
     });
 });
 ```
