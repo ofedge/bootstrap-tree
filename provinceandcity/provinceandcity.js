@@ -6,7 +6,8 @@
 				district: '#district',
 				provinceValue: undefined,
 				cityValue: undefined,
-				districtValue: undefined
+				districtValue: undefined,
+				textValue: false
 		}
 		this.settings = $.extend(true, {}, this.defaults, options);
 		this.init();
@@ -17,32 +18,36 @@
 				var $p = $(this.settings.province);
 				var $c = $(this.settings.city);
 				var $d = $(this.settings.district);
+				var textValue = this.settings.textValue;
 				var pStr = '';
 				for (var i = 0; i < allCity.length; i++) {
 					var pro = allCity[i];
-					pStr = pStr + '<option value="' + i + '">' + pro.name + '</option>';
+					var key = textValue ? pro.name : i;
+					pStr = pStr + '<option value="' + key + '">' + pro.name + '</option>';
 				}
 				$p.html(pStr).on('change', function(){
-					var pId = $(this).val();
+					var pId = $(this).find('option[value=' + $(this).val() + ']').index();
 					var cs = allCity[pId].sub;
 					var cStr = '';
 					for (var i = 0; i < cs.length; i++) {
 						var city = cs[i];
-						cStr = cStr + '<option value="' + i + '">' + city.name + '</option>'; 
+						var key = textValue ? city.name : i;
+						cStr = cStr + '<option value="' + key + '">' + city.name + '</option>'; 
 					}
 					$c.html(cStr)
 					$c.trigger('change');
 				});
 				$c.on('change', function(){
-					var pId = $p.val();
-					var cId = $(this).val();
+					var pId = $p.find('option[value=' + $p.val() + ']').index();
+					var cId = $(this).find('option[value=' + $(this).val() + ']').index();
 					var ds = allCity[pId].sub[cId].sub;
 					var dStr = '';
 					for (var i = 0; i < ds.length; i++) {
 						var district = ds[i];
-						dStr = dStr + '<option value="' + district.id + '">' + district.name + '</option>';
+						var key = textValue ? district.name : district.id;
+						dStr = dStr + '<option value="' + key + '">' + district.name + '</option>';
 					}
-					$d.html(dStr);
+					$d.html(dStr).trigger('change');
 				});
 				$p.trigger('change');
 				if(this.settings.provinceValue){
@@ -55,19 +60,16 @@
 				}
 				if(this.settings.districtValue){
 					$d.find('option:contains(' + this.settings.districtValue + ')').prop('selected', true);
+					$d.trigger('change');
 				}
 			},
 	}
 	$.provinceAndCity = function(options){
 		var args = arguments;
-		var data = new ProvinceAndCity(options);
 		if (typeof options == 'string') {
-			if (data[options]) {
-				data[options].apply(data, Array.prototype.slice.call(args, 1));
-			} else {
-				throw options + '方法不存在';
-			}
+			throw options + 'does not support';
 		}
+		new ProvinceAndCity(options);
 	}
 	$.provinceAndCity.Constructor = ProvinceAndCity;
 })(window.jQuery)

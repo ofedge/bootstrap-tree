@@ -18,7 +18,8 @@ $(function(){
     district: '#d',
     provinceValue: '台湾',
     cityValue: '台湾',
-    districtValue: '基隆市'
+    districtValue: '基隆市',
+    textValue: false
   });
 });
 </script>
@@ -82,16 +83,33 @@ $(function(){
         <div id="cr">...</div>
         <div id="dr">...</div>
       </div>
+      <div class="col-md-offset-2 col-md-5">
+        <button id="switch" class="btn btn-default">切换文本</button>
+        <span class="help-block">省市id为从0递增序号, 区域id为从1开始不重复序号</span>
+      </div>
     </fieldset>
     <script>
     $(function(){
-    	$('#pr').html($('#p').val() + ", " + $('#p :selected').html());
-        $('#cr').html($('#c').val() + ", " + $('#c :selected').html());
-        $('#dr').html($('#d').val() + ", " + $('#d :selected').html());
+    	$('#pr').html('value: ' + $('#p').val() + ', text: ' + $('#p :selected').html());
+        $('#cr').html('value: ' + $('#c').val() + ', text: ' + $('#c :selected').html());
+        $('#dr').html('value: ' + $('#d').val() + ', text: ' + $('#d :selected').html());
         $('#p, #c, #d').on('change', function(){
-           $('#pr').html($('#p').val() + ", " + $('#p :selected').html());
-           $('#cr').html($('#c').val() + ", " + $('#c :selected').html());
-           $('#dr').html($('#d').val() + ", " + $('#d :selected').html());
+        	$('#pr').html('value: ' + $('#p').val() + ', text: ' + $('#p :selected').html());
+            $('#cr').html('value: ' + $('#c').val() + ', text: ' + $('#c :selected').html());
+            $('#dr').html('value: ' + $('#d').val() + ', text: ' + $('#d :selected').html());
+        });
+        $('#switch').on('click', function(){
+    		$.provinceAndCity({
+                province: '#p',
+                city: '#c',
+                district: '#d',
+                provinceValue: '台湾',
+                cityValue: '台湾',
+                districtValue: '基隆市',
+                textValue: true
+            });
+    		$(this).html('切换id');
+            $(this).data('text', true);
         });
     });
     </script>
@@ -110,7 +128,8 @@ $(function(){
           district: '#district',
           provinceValue: '台湾',
           cityValue: '台湾',
-          districtValue: '基隆市'
+          districtValue: '基隆市',
+          textValue: false // 是否使用文本值作为选择的value, 即使用省市区名称作为value值
       });
       </pre>
       
