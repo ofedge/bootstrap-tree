@@ -47,7 +47,7 @@
 						var key = textValue ? district.name : district.id;
 						dStr = dStr + '<option value="' + key + '">' + district.name + '</option>';
 					}
-					$d.html(dStr);
+					$d.html(dStr).trigger('change'); // in case of other change event
 				});
 				$p.trigger('change');
 				if(this.settings.provinceValue){
