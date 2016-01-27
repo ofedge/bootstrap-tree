@@ -4,7 +4,8 @@
 		this.defaults = {
 			size: 0,
 			count: 10,
-			html : '123<br>'
+			html : '123<br>',
+			func: function(){}
 		}
 		this.settings = $.extend(true, {}, this.defaults, options);
 		this.init();
@@ -17,6 +18,7 @@
 			var nDivHight = $element.height();
 			var settings = this.settings;
 			$element.on('scroll', function(){
+				settings.func();
 				nScrollHeight = $(this)[0].scrollHeight;
 				nScrollTop = $(this).scrollTop();
 				if (nScrollTop + nDivHight + settings.size >= nScrollHeight){
