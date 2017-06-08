@@ -17,7 +17,7 @@
 			var nScrollTop = 0;
 			var nDivHight = $element.height();
 			var settings = this.settings;
-			$element.on('scroll', function(){
+			$element.off('scroll').on('scroll', function(){
 				settings.func();
 				nScrollHeight = $(this)[0].scrollHeight;
 				nScrollTop = $(this).scrollTop();

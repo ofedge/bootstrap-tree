@@ -30,7 +30,7 @@
 				var icons = this.settings.icons;
 				var openedNodeIcon = icons.openedNodeIcon;
 				var closedNodeIcon = icons.closedNodeIcon;
-				this.$element.find('li.parent_li > span').on('click', function(e) {
+				this.$element.find('li.parent_li > span').off('click').on('click', function(e) {
 					var children = $(this).parent('li.parent_li').find(' > ul > li');
 					if (children.is(":visible")) {
 						children.hide('fast');

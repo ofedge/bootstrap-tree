@@ -25,7 +25,7 @@
 					var key = textValue ? pro.name : i;
 					pStr = pStr + '<option value="' + key + '">' + pro.name + '</option>';
 				}
-				$p.html(pStr).on('change', function(){
+				$p.html(pStr).off('change').on('change', function(){
 					var pId = $(this).find('option[value=' + $(this).val() + ']').index();
 					var cs = allCity[pId].sub;
 					var cStr = '';
@@ -37,7 +37,7 @@
 					$c.html(cStr)
 					$c.trigger('change');
 				});
-				$c.on('change', function(){
+				$c.off('change').on('change', function(){
 					var pId = $p.find('option[value=' + $p.val() + ']').index();
 					var cId = $(this).find('option[value=' + $(this).val() + ']').index();
 					var ds = allCity[pId].sub[cId].sub;
